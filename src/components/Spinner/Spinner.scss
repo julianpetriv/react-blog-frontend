@@ -1,0 +1,50 @@
+.spinnermodal {
+    background-color: white;
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3000;
+    }
+.spinnermodal.open {
+    display: block;
+}
+.position-center {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+@keyframes spinner {
+    0% {
+        transform: scale(0);
+    }
+    25% {
+        opacity: 1;
+    }
+    50% {
+        transform: scale(-1);
+        opacity: 0;
+    }
+    51%{
+        transform: scale(0);
+        opacity: 0;
+    }
+    75%{
+        opacity: 1;
+    }
+}
+.viwi-spinner{
+    background-image: url('../../icons/logo.svg');
+    display: inline-block;
+    display: inline-block;
+    width: 40vmin;
+    height: 40vmin;
+    vertical-align: middle;
+    content: "";
+    background-size: 100% 100%;
+    animation: spinner 1.5s linear infinite;
+    opacity: 0;
+}

@@ -1,0 +1,43 @@
+.navbar{
+    background-color: black !important;
+}
+.navbar-brand{
+    padding: 0 !important;
+}
+.nav-item>a{
+    color: white !important;
+}
+.dropdown-menu{
+    border-radius: 0 !important;
+    padding: 0 !important;
+}
+.dropdown>a{
+    color: white !important;
+}
+.navbar .nav-item .active{
+    border-bottom: 2px solid white;
+}
+.dropdown-item{
+    padding-top: .7rem !important;
+    padding-bottom: .7rem !important;
+}
+.dropdown-divider{
+    margin: .3rem 0 !important;
+}
+.dropdown-item.active, .dropdown-item:active{
+    background-color: black !important;
+}
+.navbar-toggler{
+    display: flex;
+    align-items: center;
+}
+.navbar-toggler-icon{
+    background-image: url('../../icons/burger.svg') !important;
+}
+.navbar-toggler-icon.cross{
+    background-image: url('../../icons/burger-cross.svg') !important;
+}
+.badge.badge-light{
+    border-radius: 0;
+    background-color: white;
+}

@@ -1,0 +1,304 @@
+@import 'global';
+
+@font-face {
+  font-family: "e-Ukraine-Regular";
+  src: url("fonts/e-Ukraine-Regular.eot");
+  src: url("fonts/e-Ukraine-Regular.woff") format("woff"),
+  url("fonts/e-Ukraine-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "e-Ukraine-Bold";
+  src: url("fonts/e-Ukraine-Bold.eot");
+  src: url("fonts/e-Ukraine-Bold.woff") format("woff"),
+  url("fonts/e-Ukraine-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "e-Ukraine-Light";
+  src: url("fonts/e-Ukraine-Light.eot");
+  src: url("fonts/e-Ukraine-Light.woff") format("woff"),
+  url("fonts/e-Ukraine-Light.woff2") format("woff2");
+}
+@font-face {
+  font-family: "e-Ukraine-Medium";
+  src: url("fonts/e-Ukraine-Medium.eot");
+  src: url("fonts/e-Ukraine-Medium.woff") format("woff"),
+  url("fonts/e-Ukraine-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "e-Ukraine-Thin";
+  src: url("fonts/e-Ukraine-Thin.eot");
+  src: url("fonts/e-Ukraine-Thin.woff") format("woff"),
+  url("fonts/e-Ukraine-Thin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "e-Ukraine-UltraLight";
+  src: url("fonts/e-Ukraine-UltraLight.eot");
+  src: url("fonts/e-Ukraine-UltraLight.woff") format("woff"),
+  url("fonts/e-Ukraine-UltraLight.woff2") format("woff2");
+}
+@font-face {
+  font-family: "e-UkraineHead-Regular";
+  src: url("fonts/e-UkraineHead-Regular.eot");
+  src: url("fonts/e-UkraineHead-Regular.woff") format("woff"),
+  url("fonts/e-UkraineHead-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "e-UkraineHead-Bold";
+  src: url("fonts/e-UkraineHead-Bold.eot");
+  src: url("fonts/e-UkraineHead-Bold.woff") format("woff"),
+  url("fonts/e-UkraineHead-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "e-UkraineHead-Light";
+  src: url("fonts/e-UkraineHead-Light.eot");
+  src: url("fonts/e-UkraineHead-Light.woff") format("woff"),
+  url("fonts/e-UkraineHead-Light.woff2") format("woff2");
+}
+@font-face {
+  font-family: "e-UkraineHead-Medium";
+  src: url("fonts/e-UkraineHead-Medium.eot");
+  src: url("fonts/e-UkraineHead-Medium.woff") format("woff"),
+  url("fonts/e-UkraineHead-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "e-UkraineHead-Thin";
+  src: url("fonts/e-UkraineHead-Thin.eot");
+  src: url("fonts/e-UkraineHead-Thin.woff") format("woff"),
+  url("fonts/e-UkraineHead-Thin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "e-UkraineHead-UltraLight";
+  src: url("fonts/e-UkraineHead-UltraLight.eot");
+  src: url("fonts/e-UkraineHead-UltraLight.woff") format("woff"),
+  url("fonts/e-UkraineHead-UltraLight.woff2") format("woff2");
+}
+//no focus rings without pressing tab key
+.no-focus-outline a:focus,
+.no-focus-outline button:focus,
+.no-focus-outline span:focus,
+.no-focus-outline input:focus {
+  outline: none;
+}
+html{
+  margin-top: 56px;
+}
+//for sticky footer
+html, body, #root {
+  height: calc(100vh - 56px) !important;
+}
+#root {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+body {  
+  margin: 0;
+  font-family: "e-Ukraine-UltraLight" !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.custom-control-label, .custom-control-label::before, .custom-control-label::after{
+  height: $inputBtnHeight !important;
+  width: $inputBtnHeight !important;
+}
+.custom-control-label::before{
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  border: 1px solid black !important;
+  background-color: white !important;
+}
+.custom-control-input:checked~.custom-control-label::before{
+  background-color: black !important;
+}
+.custom-control-input:disabled~.custom-control-label::before{
+  background-color: #e9ecef !important;
+}
+.custom-control-label{
+  cursor: pointer !important;
+}
+input.form-control{
+  @include input;
+}
+select.form-control{
+  @include input;
+  background-position: right calc(1em + .1875rem) center !important;
+}
+textarea.form-control{
+  @include input;
+  height: initial !important;
+}
+.form-label{
+  @include label;
+}
+.custom-file-label{
+  border-radius: 0 !important;
+  background-color: black !important;
+  color: white !important;
+  border: 1px solid black !important;
+  box-shadow: none !important;
+}
+.custom-file-label::after{
+  border-radius: 0 !important;
+  background-color: white !important;
+  border: 0 !important;
+}
+.btn-primary{
+  @include mainBtn;
+}
+.btn-menu-primary{
+  @include mainBtn;
+  min-height:2rem !important;
+}
+.btn{
+  border-radius: 0 !important;
+}
+.btn-secondary{
+  @include mainBtn;
+  background-color: grey !important;
+}
+.btn-menu-secondary{
+  @include mainBtn;
+  background-color: grey !important;
+  //#1a59a5
+  min-height:2rem !important;
+}
+.btn-danger{
+  @include mainBtn;
+  background-color: #77222c !important;
+}
+.btn-menu-danger{
+  @include mainBtn;
+  background-color: #77222c !important;
+  min-height:2rem !important;
+}
+.btn-warning{
+  @include mainBtn;
+  background-color: #f7ce00 !important;
+  color: black !important;
+}
+.btn-menu-warning{
+  @include mainBtn;
+  background-color: #f7ce00 !important;
+  color: black !important;
+  min-height:2rem !important;
+}
+.btn-outline{
+  @include outlineBtn;
+}
+.btn-menu-outline{
+  @include outlineBtn;
+  min-height:2rem !important;
+}
+.btn-outline-secondary{
+  @include outlineBtn;
+  color: grey !important;
+  border-color: grey !important;
+}
+.btn-menu-outline-secondary{
+  @include outlineBtn;
+  min-height:2rem !important;
+  color: grey !important;
+  border-color: grey !important;
+}
+.btn-outline-warning{
+  @include outlineBtn;
+  color: #f7ce00 !important;
+  border-color: #f7ce00 !important;
+}
+.btn-menu-outline-warning{
+  @include outlineBtn;
+  min-height:2rem !important;
+  color: #f7ce00 !important;
+  border-color: #f7ce00 !important;
+}
+.btn-outline-danger{
+  @include outlineBtn;
+  color: #dc3545 !important;
+  border-color: #dc3545 !important;
+}
+.btn-menu-outline-danger{
+  @include outlineBtn;
+  min-height:2rem !important;
+  color: #dc3545 !important;
+  border-color: #dc3545 !important;
+}
+.btn-light{
+  @include mainBtn;
+  background-color: white !important;
+  color: black !important;
+}
+.btn-link{
+  @include mainBtn;
+  background: none !important;
+  color: black !important;
+}
+.modal-content{
+  @include modal;
+}
+.form-control.is-valid, .was-validated .form-control:valid{
+  @include validFormControl;
+}
+.page-title{
+  font-family: "e-Ukraine-Bold";
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.Toastify__toast--default{
+  background: black !important;
+  color: white !important;
+}
+.Toastify__progress-bar--default{
+  background: linear-gradient(90deg,#1a59a5,#f7ce00,) !important;
+}
+.Toastify__close-button--default{
+  color: white !important;
+}
+.modal-md{
+  max-width: 27em !important;
+}
+.modal-body .btn{
+  width: 100%;
+}
+.modal-link-btn{
+  color: black;
+  text-decoration: none;
+  &:hover{
+    color: black;
+  }
+}
+.was-validated .custom-control-input:valid~.custom-control-label {
+  color: inherit !important;
+}
+.nav-pills .nav-link{
+  border-radius: 0 !important;
+  color: black !important;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+  background-color: black !important;
+  color: white !important;
+}
+.bg-black{
+  background-color: black !important;
+  color: white;
+}
+.card{
+  border-radius: 0 !important;
+}
+b{
+  font-family: "e-Ukraine-Bold" !important;
+}
+.two-sides{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.arrow-up {
+  @include arrowUp;
+}
+.arrow-down {
+  @include arrowUp;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  border-width: 0 2px 2px 0;
+}

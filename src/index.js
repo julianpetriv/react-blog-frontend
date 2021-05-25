@@ -1,17 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import { store } from './app/store';
+import './index.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './components/App/App';
+import { store } from './store/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import { ConnectedRouter } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
+import ScrollToTop from './utils/ScrollToTop';
+import { getDataFromLocal } from './utils/localStorage';
+import { SetTokensGetUser } from './services';
+import { setCurrentUser } from './components/LoginRegister/actions';
+
+const history = createBrowserHistory();
+
+//set tokens from localstorage
+const tokens = getDataFromLocal("tokens");
+const user = SetTokensGetUser(tokens);
+store.dispatch(setCurrentUser(user));
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <ScrollToTop>
+        <App />
+      </ScrollToTop>
+    </ConnectedRouter>
+  </Provider>,
   document.getElementById('root')
 );
 
