@@ -7,7 +7,7 @@ import {
 
 
 // method for get data of user from token
-const GetUser = tokens => jwt.decode(tokens.jwtToken);
+const GetUser = tokens => jwt.decode(tokens.jwt_token);
 
 //base GET method
 export const GetResource = async url => {
@@ -59,8 +59,8 @@ export const SetTokensGetUser = tokens => {
     }
     setDataToLocal("tokens", tokens);
 
-    if (tokens.jwtToken) {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${tokens.jwtToken}`;
+    if (tokens.jwt_token) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${tokens.jwt_token}`;
     } else {
         delete axios.defaults.headers.common['Authorization'];
     }

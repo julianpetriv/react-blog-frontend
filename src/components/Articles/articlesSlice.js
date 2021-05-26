@@ -11,7 +11,7 @@ export const getArticles = createAsyncThunk(
             return result;
         }
         catch (err) {
-            toast.error(err.response ? err.response.data.errors.join(", ") : err.message);
+            toast.error(err.response ? (err.response.data.error || err.response.data.errors.join(", ")) : err.message);
             return rejectWithValue(err.response ? err.response.data : err.message);
         }
     }
@@ -25,7 +25,7 @@ export const getArticle = createAsyncThunk(
             return result;
         }
         catch (err) {
-            toast.error(err.response ? err.response.data.errors.join(", ") : err.message);
+            toast.error(err.response ? (err.response.data.error || err.response.data.errors.join(", ")) : err.message);
             return rejectWithValue(err.response ? err.response.data : err.message);
         }
     }
@@ -40,7 +40,8 @@ export const createArticle = createAsyncThunk(
             return result;
         }
         catch (err) {
-            toast.error(err.response ? err.response.data.errors.join(", ") : err.message);
+            console.log(err.response)
+            toast.error(err.response ? (err.response.data.error || err.response.data.errors.join(", ")) : err.message);
             return rejectWithValue(err.response ? err.response.data : err.message);
         }
     }
@@ -55,7 +56,7 @@ export const updateArticle = createAsyncThunk(
             return result;
         }
         catch (err) {
-            toast.error(err.response ? err.response.data.errors.join(", ") : err.message);
+            toast.error(err.response ? (err.response.data.error || err.response.data.errors.join(", ")) : err.message);
             return rejectWithValue(err.response ? err.response.data : err.message);
         }
     }
@@ -71,7 +72,7 @@ export const removeArticle = createAsyncThunk(
             return result;
         }
         catch (err) {
-            toast.error(err.response ? err.response.data.errors.join(", ") : err.message);
+            toast.error(err.response ? (err.response.data.error || err.response.data.errors.join(", ")) : err.message);
             return rejectWithValue(err.response ? err.response.data : err.message);
         }
     }

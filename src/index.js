@@ -4,7 +4,7 @@ import './index.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import App from './components/App/App';
-import { store } from './store/store';
+import { history, store } from './store/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import { ConnectedRouter } from 'connected-react-router';
@@ -18,8 +18,6 @@ import { toast } from 'react-toastify';
 toast.configure({
   position: 'bottom-right'
 })
-
-const history = createBrowserHistory();
 
 //set tokens from localstorage
 const tokens = getDataFromLocal("tokens");

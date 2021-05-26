@@ -8,8 +8,7 @@ export {BASE_URL};
 
 //константи AccountController
 export const VERIFY_PHONE_NUMBER_URL = 'account/verify_phone_number';
-export const LOGIN_USER = 'account/login';
-export const REGISTER_CLIENT = 'account/register';
+export const LOGIN_REGISTER_USER = 'account/login_register';
 
 //константи ArticleController
 export const ARTICLES_URL = 'articles';

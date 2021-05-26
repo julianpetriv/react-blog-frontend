@@ -8,7 +8,7 @@ import { createComment, removeComment } from "./commentsSlice";
 
 const CommentsContainer = ({article}) => {
     const dispatch = useDispatch();
-    const userName = useSelector(state => state.user.data.name);
+    const name = useSelector(state => state.user.data.name);
     const [validated, setValidated] = useState(false);
     
     const handleSubmit = event => {
@@ -17,7 +17,7 @@ const CommentsContainer = ({article}) => {
         const form = event.currentTarget;
         if (form.checkValidity() === true) {
             const comment = {
-                commenter: "hel",
+                commenter: name,
                 body: form.elements.body.value,
                 status: 'public'
             }

@@ -1,8 +1,7 @@
 export const verifyPhoneNumber = {
     success: false,
     error: null,
-    isRegistered: "",
-    firstname: ""
+    name: ""
 };
 
 export const verifyPhoneNumberStarted = state => {
@@ -31,8 +30,7 @@ export const verifyPhoneNumberSuccess = (state, action) => {
         verifyPhoneNumber: {
             success: true,
             error: null,
-            isRegistered: action.payload.isRegistered,
-            firstname: action.payload.firstName
+            name: action.payload.name
         }        
     };
 };
@@ -42,8 +40,7 @@ export const verifyPhoneNumberFailed = (state, action) => {
         verifyPhoneNumber: {
             success: false,
             error: action.payload,
-            isRegistered: "",
-            firstname: ""
+            name: ""
         }
     };
 };

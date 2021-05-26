@@ -14,7 +14,7 @@ export const createComment = createAsyncThunk(
             return result;
         }
         catch (err) {
-            toast.error(err.response ? err.response.data.errors.join(", ") : err.message);
+            toast.error(err.response ? (err.response.data.error || err.response.data.errors.join(", ")) : err.message);
             return rejectWithValue(err.response ? err.response.data : err.message);
         }
     }
@@ -30,7 +30,7 @@ export const removeComment = createAsyncThunk(
             return result;
         }
         catch (err) {
-            toast.error(err.response ? err.response.data.errors.join(", ") : err.message);
+            toast.error(err.response ? (err.response.data.error || err.response.data.errors.join(", ")) : err.message);
             return rejectWithValue(err.response ? err.response.data : err.message);
         }
     }

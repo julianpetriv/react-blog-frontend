@@ -26,7 +26,7 @@ const ArticlesContainer = _ => {
     }, [id, dispatch])
 
     useEffect(_ => {
-        !showModal && dispatch(resetArticle(id))
+        !showModal && dispatch(resetArticle())
     }, [showModal, dispatch])
 
     const openArticle = (event, art) => {

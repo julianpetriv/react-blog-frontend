@@ -25,7 +25,7 @@ export const setCurrentUser = user => ({type: SET_CURRENT_USER, payload: user});
 export const verifyPhoneNumber = phone => {
     return dispatch => {
         dispatch(vPhNStarted())
-        PostResource(VERIFY_PHONE_NUMBER_URL, {phone})
+        PostResource(VERIFY_PHONE_NUMBER_URL, {phone_number: phone})
         .then((result) => {
             dispatch(vPhNSuccess(result));
         })
@@ -34,14 +34,15 @@ export const verifyPhoneNumber = phone => {
         })
     };
 };
-export const loginRegister = (phone, phonetoken, firstname, type) => {
+export const loginRegister = (phone, phonetoken, name, type) => {
     return dispatch => {
         dispatch(loginStarted());
-        PostResourceWithTokens(type, {phone: phone, verif: phonetoken, firstname: firstname})
+        PostResourceWithTokens(type, {phone_number: phone, verif: parseInt(phonetoken), name: name})
         .then(user => {
             dispatch(loginSuccess());
             dispatch(setCurrentUser(user));
             dispatch(vPhNReset())
+            dispatch(push("/"))
         })
         .catch((err) => {
             dispatch(loginFailed(err.response?err.response.data:err.message));

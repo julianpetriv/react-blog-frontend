@@ -7,8 +7,8 @@ import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
 
 const Login = ({ setValue, validated, handleSubmit, success, vPhNError,
-    loginError, firstname, count, sendCodeAgain, isValidPhoneNumber, onTokenChange,
-    onFirstnameChange, submitActive }) => {
+    loginError, name, count, sendCodeAgain, isValidPhoneNumber, onTokenChange,
+    onNameChange, submitActive }) => {
     const { Row, Group, Control } = Form;
     return (
         <Modal centered show={true} size="md">
@@ -41,18 +41,14 @@ const Login = ({ setValue, validated, handleSubmit, success, vPhNError,
                         <Row style={{ visibility: success ? 'visible' : 'hidden' }}>
                             <Group as={Col} md="12">
                                 <Control
-                                    defaultValue={firstname}
-                                    name="firstname"
+                                    required={success}
+                                    defaultValue={name}
+                                    name="name"
                                     type="text"
                                     autoComplete="given-name"
                                     placeholder="Enter your name"
-                                    onChange={onFirstnameChange}
+                                    onChange={onNameChange}
                                 />
-                            </Group>
-                        </Row>
-                        <Row style={{ visibility: (success && !firstname) ? 'visible' : 'hidden' }}>
-                            <Group as={Col} md="12" className="bodia-text">
-                                You may leave the Name field empty, but then we will call you Bodia
                             </Group>
                         </Row>
                     </>
@@ -74,8 +70,8 @@ const Login = ({ setValue, validated, handleSubmit, success, vPhNError,
                     {loginError && <span style={{ color: 'red' }}>{loginError}</span>}
                     {!success ? <Row>
                         <Group as={Col} md="12">
-                            <span className="proposal-accept">When you register, you agree with the 
-                                <Link target="_blank" to="/offer">public offer</Link></span>
+                            <span className="proposal-accept">When you register, you agree with the
+                                <Link target="_blank" to="/offer"> public offer</Link></span>
                         </Group>
                     </Row> :
                         <Row>
