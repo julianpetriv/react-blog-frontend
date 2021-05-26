@@ -13,3 +13,6 @@ export const REGISTER_CLIENT = 'account/register';
 
 //константи ArticleController
 export const ARTICLES_URL = 'articles';
+
+//константи CommentController
+export const COMMENTS_URL = 'comments';

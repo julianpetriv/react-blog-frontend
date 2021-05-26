@@ -11,11 +11,26 @@ export const getArticles = createAsyncThunk(
             return result;
         }
         catch (err) {
-            toast.error(err.response ? err.response.data : err.message);
+            toast.error(err.response ? err.response.data.errors.join(", ") : err.message);
             return rejectWithValue(err.response ? err.response.data : err.message);
         }
     }
 );
+
+export const getArticle = createAsyncThunk(
+    'getArticle',
+    async (id, {rejectWithValue}) => {              
+        try {            
+            const result = await GetResource(ARTICLES_URL+"/"+id);
+            return result;
+        }
+        catch (err) {
+            toast.error(err.response ? err.response.data.errors.join(", ") : err.message);
+            return rejectWithValue(err.response ? err.response.data : err.message);
+        }
+    }
+);
+
 export const createArticle = createAsyncThunk(
     'createArticle',
     async (article, {rejectWithValue, dispatch}) => {              
@@ -25,7 +40,7 @@ export const createArticle = createAsyncThunk(
             return result;
         }
         catch (err) {
-            toast.error(err.response ? err.response.data : err.message);
+            toast.error(err.response ? err.response.data.errors.join(", ") : err.message);
             return rejectWithValue(err.response ? err.response.data : err.message);
         }
     }
@@ -40,7 +55,7 @@ export const updateArticle = createAsyncThunk(
             return result;
         }
         catch (err) {
-            toast.error(err.response ? err.response.data : err.message);
+            toast.error(err.response ? err.response.data.errors.join(", ") : err.message);
             return rejectWithValue(err.response ? err.response.data : err.message);
         }
     }
@@ -48,14 +63,15 @@ export const updateArticle = createAsyncThunk(
 
 export const removeArticle = createAsyncThunk(
     'removeArticle',
-    async (article, {rejectWithValue, dispatch}) => {              
+    async (article, {rejectWithValue, dispatch}) => {    
+        console.log(article)          
         try {            
             const result = await DeleteResource(ARTICLES_URL+"/"+article.id);
             dispatch(getArticles());
             return result;
         }
         catch (err) {
-            toast.error(err.response ? err.response.data : err.message);
+            toast.error(err.response ? err.response.data.errors.join(", ") : err.message);
             return rejectWithValue(err.response ? err.response.data : err.message);
         }
     }
@@ -69,10 +85,22 @@ const articlesSlice = createSlice({
             error: null,
             articles: []
         },
+        getArticle: {
+            success: false,
+            error: null,
+            article: null
+        },
         updateArticle: {
             success: false,
             error: null
         },
+    },
+    reducers: {
+        resetArticle: (state, action) => {
+            state.getArticle.success = false;
+            state.getArticle.article = null;
+            state.getArticle.error = action.payload;
+        }
     },
     extraReducers: {
         [getArticles.pending]: state => {
@@ -85,8 +113,22 @@ const articlesSlice = createSlice({
         },
         [getArticles.rejected]: (state, action) => {
             state.getArticles.success = false;
-            state.getArticles.user = {};
+            state.getArticles.articles = [];
             state.getArticles.error = action.payload;
+        },
+
+        [getArticle.pending]: state => {
+            state.getArticle.success = false;
+            state.getArticle.error = null;
+        },
+        [getArticle.fulfilled]: (state, action) => {
+            state.getArticle.success = true;
+            state.getArticle.article = action.payload;
+        },
+        [getArticle.rejected]: (state, action) => {
+            state.getArticle.success = false;
+            state.getArticle.article = {};
+            state.getArticle.error = action.payload;
         },
 
         [createArticle.pending]: state => {
@@ -126,5 +168,7 @@ const articlesSlice = createSlice({
         }
     }
 });
+
+export const {resetArticle} = articlesSlice.actions;
 
 export default articlesSlice.reducer;

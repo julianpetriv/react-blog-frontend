@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import Article from "./Article";
-import { getArticles, removeArticle } from "./articlesSlice";
+import { getArticle, getArticles, removeArticle, resetArticle } from "./articlesSlice";
 import ArticleModalContainer from "./ArticleModal/ArticleModalContainer";
 import FullArticle from "./FullArticle";
 
@@ -12,13 +12,33 @@ const ArticlesContainer = _ => {
     let history = useHistory();
     const articles = useSelector(state => state.articles.getArticles.articles);
     const dispatch = useDispatch();
-    const article = articles.find(a=>a.id===parseInt(id));
+    const article = useSelector(state => state.articles.getArticle.article);
     const [showModal, setShowModal] = useState(false);
-    const [selectedArticle, setSelectedArticle] = useState(null);
+    console.log(article);
 
     useEffect(_ => {
         dispatch(getArticles());
     }, [dispatch])
+    
+    useEffect(_ => {
+        id ? dispatch(getArticle(id)) : 
+            dispatch(resetArticle());
+    }, [id, dispatch])
+
+    useEffect(_ => {
+        !showModal && dispatch(resetArticle(id))
+    }, [showModal, dispatch])
+
+    const openArticle = (event, art) => {
+        const el = event.target;
+        if (el.nodeName !== "BUTTON")
+            history.push("articles/"+art.id);
+    }
+
+    const updateArticle = (art) => {
+        dispatch(getArticle(art.id));
+        setShowModal(true);
+    }
 
     return (
         <>
@@ -29,17 +49,17 @@ const ArticlesContainer = _ => {
                     <>
                         {articles.map(a => 
                             <Article key={a.id} title={a.title} 
-                                openArticle={_=>history.push("articles/"+a.id)} 
-                                updateArticle={_=>{setSelectedArticle(a); setShowModal(true);}}
-                                removeArticle={_=>dispatch(removeArticle(a))}
+                                openArticle={e=>openArticle(e, a)} 
+                                updateArticle={_ => updateArticle(a)}
+                                removeArticle={_ => dispatch(removeArticle(a))}
                             />
                         )}
-                        <Article title="+ Create new article" openArticle={_=>{setSelectedArticle(null);setShowModal(true);}} noEdit/>
+                        <Article title="+ Create new article" openArticle={_=>{dispatch(resetArticle()); setShowModal(true);}} noEdit/>
                     </>
                 }
                 
             </Container>
-            <ArticleModalContainer show={showModal} setShow={setShowModal} article={selectedArticle}/>
+            <ArticleModalContainer show={showModal} setShow={setShowModal} article={article}/>
         </>
     )
 }

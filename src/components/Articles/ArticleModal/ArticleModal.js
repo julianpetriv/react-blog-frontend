@@ -24,7 +24,7 @@ const ArticleModal = ({ show, setShow, handleSubmit, validated, article }) => {
                             />
                         </Form.Group>
                         <Form.Group as={Col} md={4}>
-                            <Form.Label>Title</Form.Label>
+                            <Form.Label>Status</Form.Label>
                             <Form.Control
                                 as="select"
                                 required
@@ -47,7 +47,7 @@ const ArticleModal = ({ show, setShow, handleSubmit, validated, article }) => {
                                 required
                                 name="body"
                                 type="text"
-                                placeholder="What is like to be Ruby?"
+                                placeholder="The whole thing (minimum 10 symbols)"
                                 defaultValue={article?.body}
                             />
                         </Form.Group>

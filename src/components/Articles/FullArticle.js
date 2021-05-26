@@ -1,10 +1,18 @@
+import CommentsContainer from '../Comments/CommentsContainer';
+import Spinner from '../Spinner';
 import './Article.scss';
 
 const FullArticle = ({article}) => {
+    console.log(article)
     return (
-        <div>
-            {article?.body}
-        </div>
+        article ?
+        <>
+            <div className="mb-5">
+                {article?.body}
+            </div>
+            <CommentsContainer article={article}/>
+        </> : 
+        <Spinner/>
     );
 };
 
