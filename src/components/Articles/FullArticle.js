@@ -5,7 +5,6 @@ import Spinner from '../Spinner';
 import './Article.scss';
 
 const FullArticle = ({article}) => {
-    console.log(article)
     return (
         article ?
         <>

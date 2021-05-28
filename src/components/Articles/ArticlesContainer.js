@@ -3,9 +3,11 @@ import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import Article from "./Article";
-import { getArticle, getArticles, removeArticle, resetArticle } from "./articlesSlice";
+import { findArticles, getArticle, getArticles, removeArticle, resetArticle } from "./articlesSlice";
 import ArticleModalContainer from "./ArticleModal/ArticleModalContainer";
 import FullArticle from "./FullArticle";
+import Search from "./Search";
+import usePrevious from "../../utils/customHooks/usePrevious";
 
 const ArticlesContainer = _ => {
     const { id } = useParams();
@@ -14,20 +16,36 @@ const ArticlesContainer = _ => {
     const dispatch = useDispatch();
     const article = useSelector(state => state.articles.getArticle.article);
     const [showModal, setShowModal] = useState(false);
-    console.log(article);
+    const [searchValue, setSearchValue] = useState("");
+    const prevSearchValue = usePrevious(searchValue);
 
     useEffect(_ => {
         dispatch(getArticles());
     }, [dispatch])
     
     useEffect(_ => {
-        id ? dispatch(getArticle(id)) : 
+        if(id)
+            dispatch(getArticle(id))
+        else{
             dispatch(resetArticle());
+            setSearchValue("")
+        }
     }, [id, dispatch])
 
     useEffect(_ => {
-        !showModal && dispatch(resetArticle())
+        if(!showModal){
+            dispatch(resetArticle())
+            setSearchValue("");
+        }
     }, [showModal, dispatch])
+
+    useEffect(_ => {
+        
+        if(searchValue.length >= 3)
+            dispatch(findArticles(searchValue))
+        else if(searchValue.length < 3 && prevSearchValue?.length >= 3)
+            dispatch(getArticles());
+    }, [searchValue, dispatch, prevSearchValue?.length])
 
     const openArticle = (event, art) => {
         const el = event.target;
@@ -47,6 +65,7 @@ const ArticlesContainer = _ => {
                 {id ? 
                     <FullArticle article={article}/> :
                     <>
+                        <Search value={searchValue} handleChange={e => setSearchValue(e.target.value)}/>
                         {articles.map(a => 
                             <Article key={a.id} title={a.title} 
                                 openArticle={e=>openArticle(e, a)} 

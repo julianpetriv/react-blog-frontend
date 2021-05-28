@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import {ARTICLES_URL} from '../../constants/index';
+import {ARTICLES_FIND_URL, ARTICLES_URL} from '../../constants/index';
 import { GetResource, PostResource, PutResource, DeleteResource } from '../../services/index'
 
 export const getArticles = createAsyncThunk(
@@ -8,6 +8,20 @@ export const getArticles = createAsyncThunk(
     async (arg, {rejectWithValue}) => {              
         try {            
             const result = await GetResource(ARTICLES_URL);
+            return result;
+        }
+        catch (err) {
+            toast.error(err.response ? (err.response.data.error || err.response.data.errors.join(", ")) : err.message);
+            return rejectWithValue(err.response ? err.response.data : err.message);
+        }
+    }
+);
+
+export const findArticles = createAsyncThunk(
+    'findArticles',
+    async (q, {rejectWithValue}) => {              
+        try {            
+            const result = await GetResource(ARTICLES_FIND_URL + "/" + q);
             return result;
         }
         catch (err) {
@@ -40,7 +54,6 @@ export const createArticle = createAsyncThunk(
             return result;
         }
         catch (err) {
-            console.log(err.response)
             toast.error(err.response ? (err.response.data.error || err.response.data.errors.join(", ")) : err.message);
             return rejectWithValue(err.response ? err.response.data : err.message);
         }
@@ -64,8 +77,7 @@ export const updateArticle = createAsyncThunk(
 
 export const removeArticle = createAsyncThunk(
     'removeArticle',
-    async (article, {rejectWithValue, dispatch}) => {    
-        console.log(article)          
+    async (article, {rejectWithValue, dispatch}) => {
         try {            
             const result = await DeleteResource(ARTICLES_URL+"/"+article.id);
             dispatch(getArticles());
@@ -113,6 +125,20 @@ const articlesSlice = createSlice({
             state.getArticles.articles = action.payload;
         },
         [getArticles.rejected]: (state, action) => {
+            state.getArticles.success = false;
+            state.getArticles.articles = [];
+            state.getArticles.error = action.payload;
+        },
+
+        [findArticles.pending]: state => {
+            state.getArticles.success = false;
+            state.getArticles.error = null;
+        },
+        [findArticles.fulfilled]: (state, action) => {
+            state.getArticles.success = true;
+            state.getArticles.articles = action.payload;
+        },
+        [findArticles.rejected]: (state, action) => {
             state.getArticles.success = false;
             state.getArticles.articles = [];
             state.getArticles.error = action.payload;

@@ -8,7 +8,6 @@ import { history, store } from './store/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import { ConnectedRouter } from 'connected-react-router';
-import { createBrowserHistory } from 'history';
 import ScrollToTop from './utils/ScrollToTop';
 import { getDataFromLocal } from './utils/localStorage';
 import { SetTokensGetUser } from './services';

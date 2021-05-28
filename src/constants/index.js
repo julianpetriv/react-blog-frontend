@@ -14,6 +14,7 @@ export const LOGIN_REGISTER_USER = 'account/login_register';
 
 //константи ArticleController
 export const ARTICLES_URL = 'articles';
+export const ARTICLES_FIND_URL = 'articles/find';
 
 //константи CommentController
 export const COMMENTS_URL = 'comments';

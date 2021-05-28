@@ -8,7 +8,6 @@ export const createComment = createAsyncThunk(
     'createComment',
     async ({article, comment}, {rejectWithValue, dispatch}) => {              
         try {
-            console.log(article, comment)
             const result = await PostResource(`${ARTICLES_URL}/${article.id}/${COMMENTS_URL}`, comment);
             dispatch(getArticle(article.id));
             return result;
@@ -22,9 +21,8 @@ export const createComment = createAsyncThunk(
 
 export const removeComment = createAsyncThunk(
     'removeComment',
-    async ({article, comment}, {rejectWithValue, dispatch}) => {     
-        console.log(article, comment) 
-        try {            
+    async ({article, comment}, {rejectWithValue, dispatch}) => {
+        try {
             const result = await DeleteResource(`${ARTICLES_URL}/${article.id}/${COMMENTS_URL}/${comment.id}`);
             dispatch(getArticle(article.id));
             return result;

@@ -21,7 +21,6 @@ const CommentsContainer = ({article}) => {
                 body: form.elements.body.value,
                 status: 'public'
             }
-            console.log("HELOO")
             dispatch(createComment({article, comment}));
             form.elements.body.value = ""
         }
