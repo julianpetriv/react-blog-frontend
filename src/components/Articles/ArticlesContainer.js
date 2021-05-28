@@ -8,6 +8,7 @@ import ArticleModalContainer from "./ArticleModal/ArticleModalContainer";
 import FullArticle from "./FullArticle";
 import Search from "./Search";
 import usePrevious from "../../utils/customHooks/usePrevious";
+import { toast } from "react-toastify";
 
 const ArticlesContainer = _ => {
     const { id } = useParams();
@@ -15,6 +16,7 @@ const ArticlesContainer = _ => {
     const articles = useSelector(state => state.articles.getArticles.articles);
     const dispatch = useDispatch();
     const article = useSelector(state => state.articles.getArticle.article);
+    const isAuthenticated = useSelector(state => state.user.isAuthenticated)
     const [showModal, setShowModal] = useState(false);
     const [searchValue, setSearchValue] = useState("");
     const prevSearchValue = usePrevious(searchValue);
@@ -73,7 +75,8 @@ const ArticlesContainer = _ => {
                                 removeArticle={_ => dispatch(removeArticle(a))}
                             />
                         )}
-                        <Article title="+ Create new article" openArticle={_=>{dispatch(resetArticle()); setShowModal(true);}} noEdit/>
+                        <Article title="+ Create new article" 
+                            openArticle={_=>isAuthenticated ? setShowModal(true) : toast.error("Not Authorized")} noEdit/>
                     </>
                 }
                 
