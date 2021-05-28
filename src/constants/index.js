@@ -6,6 +6,8 @@ if(process.env.NODE_ENV === 'production')
 
 export {BASE_URL};
 
+export const IMAGES_URL = 'https://rails-blog.fra1.digitaloceanspaces.com/';
+
 //константи AccountController
 export const VERIFY_PHONE_NUMBER_URL = 'account/verify_phone_number';
 export const LOGIN_REGISTER_USER = 'account/login_register';

@@ -2,8 +2,9 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import { Button } from 'react-bootstrap';
+import ArticleImage from './ArticleImage';
 
-const ArticleModal = ({ show, setShow, handleSubmit, validated, article }) => {
+const ArticleModal = ({ show, setShow, handleSubmit, validated, article, setImage }) => {
     return (
         <Modal centered show={show} onHide={_=>setShow(false)} size="lg">
             <Modal.Header closeButton>
@@ -11,6 +12,7 @@ const ArticleModal = ({ show, setShow, handleSubmit, validated, article }) => {
             </Modal.Header>
             <Modal.Body>
                 <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                    <ArticleImage image={article?.image} setImage={setImage} title={article?.title}/>
                     <Form.Row>
                         <Form.Group as={Col} md={8}>
                             <Form.Label>Title</Form.Label>

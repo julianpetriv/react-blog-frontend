@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import axios from 'axios';
 import { setDataToLocal } from '../utils/localStorage';
 import {
-    BASE_URL
+    BASE_URL, IMAGES_URL
 } from '../constants';
 
 
@@ -73,7 +73,7 @@ export const PostResourceWithTokens = async (url, data) => {
     return SetTokensGetUser(tokens);
 };
 
-// get static file with photo from some category
+// get static file with image from some category
 export const getImage = path => {
-    return `${BASE_URL}${path}`;
+    return `${IMAGES_URL}${path}`;
 };
